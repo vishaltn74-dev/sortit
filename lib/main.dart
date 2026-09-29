@@ -13,6 +13,7 @@ class SortItApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'SortIt',
+      debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       home: const HomeScreen(),
     );

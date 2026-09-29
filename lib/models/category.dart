@@ -3,7 +3,7 @@ class Category {
   final String name;
   final String icon;
 
-  Category({
+  const Category({
     required this.id,
     required this.name,
     required this.icon,

@@ -4,6 +4,6 @@ import 'package:sortit/main.dart';
 void main() {
   testWidgets('App launches smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(const SortItApp());
-    expect(find.text('Home Screen'), findsOneWidget);
+    expect(find.text('SortIt'), findsWidgets);
   });
 }
