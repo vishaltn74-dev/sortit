@@ -173,20 +173,25 @@ class _BookingScreenState extends State<BookingScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            '\${widget.category.name} - \${widget.issue.name}',
-            style: TextStyle(color: AppTheme.pureWhite.withOpacity(0.7)),
+            '${widget.category.name} - ${widget.issue.name}',
+            style: TextStyle(color: AppTheme.pureWhite.withValues(alpha: 0.7)),
+            overflow: TextOverflow.ellipsis,
           ),
           const Divider(color: Colors.white24, height: 32),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text('Inspection Fee', style: TextStyle(color: AppTheme.pureWhite)),
-              Text(
-                '₹\${widget.repairer.inspectionFee}',
-                style: const TextStyle(
-                  color: AppTheme.accentOrange,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
+              Flexible(
+                child: Text(
+                  '₹${widget.repairer.inspectionFee}',
+                  style: const TextStyle(
+                    color: AppTheme.accentOrange,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.right,
                 ),
               ),
             ],
