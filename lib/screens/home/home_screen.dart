@@ -108,7 +108,6 @@ class HomeScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return CategoryCard(
                             category: categories[index],
-                            isBlack: index == 0,
                             onTap: () {
                               Navigator.push(
                                 context,

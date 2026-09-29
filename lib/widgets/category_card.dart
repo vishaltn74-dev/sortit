@@ -5,13 +5,11 @@ import 'package:sortit/theme/app_theme.dart';
 class CategoryCard extends StatelessWidget {
   final Category category;
   final VoidCallback onTap;
-  final bool isBlack;
 
   const CategoryCard({
     super.key,
     required this.category,
     required this.onTap,
-    this.isBlack = false,
   });
 
   @override
@@ -20,32 +18,40 @@ class CategoryCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: isBlack ? AppTheme.trueBlack : AppTheme.pureWhite,
-          borderRadius: BorderRadius.circular(24),
-          boxShadow: isBlack ? [] : [
+          color: AppTheme.pureWhite,
+          borderRadius: BorderRadius.circular(32),
+          border: Border.all(color: Colors.white, width: 2),
+          boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.08),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
+              color: Colors.black.withValues(alpha: 0.04),
+              blurRadius: 24,
+              offset: const Offset(0, 8),
             )
           ],
         ),
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Icon(
-              _getIcon(category.icon),
-              color: isBlack ? AppTheme.pureWhite : AppTheme.trueBlack,
-              size: 32,
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: AppTheme.primaryRed.withValues(alpha: 0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                _getIcon(category.icon),
+                color: AppTheme.primaryRed,
+                size: 28,
+              ),
             ),
             Text(
               category.name,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 14,
-                color: isBlack ? AppTheme.pureWhite : AppTheme.trueBlack,
+                fontSize: 15,
+                color: AppTheme.trueBlack,
               ),
             ),
           ],
