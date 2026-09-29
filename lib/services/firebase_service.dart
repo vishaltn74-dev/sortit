@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
+import 'package:sortit/firebase_options.dart';
 
 class FirebaseService {
   FirebaseService._();
@@ -25,9 +26,9 @@ class FirebaseService {
     String? name,
     FirebaseOptions? options,
   }) async {
-    if (options != null) {
-      return await Firebase.initializeApp(name: name, options: options);
-    }
-    return await Firebase.initializeApp(name: name);
+    return await Firebase.initializeApp(
+      name: name,
+      options: options ?? DefaultFirebaseOptions.currentPlatform,
+    );
   }
 }
