@@ -121,9 +121,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
                               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                             ),
                             const SizedBox(height: 16),
-                            _buildCauseItem('Clogged filter'),
-                            _buildCauseItem('Blocked drain hose'),
-                            _buildCauseItem('Drain pump issue'),
+                            ..._getCauses().map((cause) => _buildCauseItem(cause)),
                             
                             const Spacer(),
                             
@@ -132,7 +130,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
                                 Expanded(
                                   child: _buildEstimateCard(
                                     'Repair',
-                                    '₹500 - ₹1,500',
+                                    _getRepairEstimate(),
                                     isBlack: true,
                                   ),
                                 ),
@@ -140,7 +138,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
                                 Expanded(
                                   child: _buildEstimateCard(
                                     'Replacement',
-                                    '₹12,000+',
+                                    _getReplacementEstimate(),
                                     isBlack: false,
                                   ),
                                 ),
@@ -234,5 +232,47 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
         ],
       ),
     );
+  }
+
+  List<String> _getCauses() {
+    switch (widget.category.icon) {
+      case 'ac':
+        return ['Low refrigerant level', 'Dirty condenser coils', 'Faulty compressor', 'Broken thermostat'];
+      case 'phone':
+        return ['Physical drop/impact', 'Water damage', 'Software glitch', 'Degraded battery capacity'];
+      case 'laptop':
+        return ['Hardware failure', 'Overheating / dust buildup', 'OS corruption', 'Faulty motherboard'];
+      case 'bicycle':
+        return ['Puncture / sharp object', 'Wear and tear', 'Loose components', 'Lack of lubrication'];
+      case 'electrical':
+        return ['Overloaded circuit', 'Faulty wiring', 'Blown fuse', 'Damaged outlet'];
+      case 'washing_machine':
+      default:
+        return ['Clogged filter', 'Blocked drain hose', 'Drain pump issue', 'Faulty motor'];
+    }
+  }
+
+  String _getRepairEstimate() {
+    switch (widget.category.icon) {
+      case 'ac': return '₹800 - ₹2,500';
+      case 'phone': return '₹1,500 - ₹5,000';
+      case 'laptop': return '₹2,000 - ₹8,000';
+      case 'bicycle': return '₹200 - ₹800';
+      case 'electrical': return '₹300 - ₹1,000';
+      case 'washing_machine':
+      default: return '₹500 - ₹1,500';
+    }
+  }
+
+  String _getReplacementEstimate() {
+    switch (widget.category.icon) {
+      case 'ac': return '₹25,000+';
+      case 'phone': return '₹15,000+';
+      case 'laptop': return '₹35,000+';
+      case 'bicycle': return '₹5,000+';
+      case 'electrical': return '₹2,000+';
+      case 'washing_machine':
+      default: return '₹12,000+';
+    }
   }
 }
