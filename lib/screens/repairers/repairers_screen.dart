@@ -67,9 +67,9 @@ class _RepairersScreenState extends State<RepairersScreen> {
     final sponsored = repairers[0];
 
     return Scaffold(
-      backgroundColor: AppTheme.royalBlue,
+      backgroundColor: AppTheme.primaryRed,
       appBar: AppBar(
-        backgroundColor: AppTheme.royalBlue,
+        backgroundColor: AppTheme.primaryRed,
         foregroundColor: AppTheme.pureWhite,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new),
@@ -87,7 +87,7 @@ class _RepairersScreenState extends State<RepairersScreen> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     decoration: BoxDecoration(
-                      color: AppTheme.lightBlueBg,
+                      color: AppTheme.primaryRed,
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: const Row(
@@ -116,7 +116,7 @@ class _RepairersScreenState extends State<RepairersScreen> {
                 ),
               ),
               child: _isLoading
-                ? const Center(child: CircularProgressIndicator(color: AppTheme.royalBlue))
+                ? const Center(child: CircularProgressIndicator(color: AppTheme.primaryRed))
                 : ListView(
                     physics: const BouncingScrollPhysics(),
                     padding: const EdgeInsets.all(24),

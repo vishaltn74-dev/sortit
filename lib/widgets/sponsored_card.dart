@@ -20,7 +20,7 @@ class SponsoredCard extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 16),
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: AppTheme.accentYellow,
+          color: AppTheme.accentOrange,
           borderRadius: BorderRadius.circular(32),
         ),
         child: Column(
@@ -33,7 +33,7 @@ class SponsoredCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
                     color: AppTheme.trueBlack.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(16),
                   ),
                   child: const Text(
                     'Sponsored',
@@ -101,7 +101,7 @@ class SponsoredCard extends StatelessWidget {
                     color: AppTheme.trueBlack,
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(Icons.arrow_forward, color: AppTheme.accentYellow, size: 20),
+                  child: const Icon(Icons.arrow_forward, color: AppTheme.accentOrange, size: 20),
                 )
               ],
             ),

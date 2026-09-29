@@ -46,7 +46,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> with SingleTick
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.royalBlue,
+      backgroundColor: AppTheme.primaryRed,
       body: Column(
         children: [
           Expanded(
@@ -57,7 +57,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> with SingleTick
                   width: 100,
                   height: 100,
                   decoration: const BoxDecoration(
-                    color: AppTheme.accentYellow,
+                    color: AppTheme.accentOrange,
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(

@@ -34,7 +34,7 @@ class RepairerCard extends StatelessWidget {
                 Row(
                   children: [
                     CircleAvatar(
-                      backgroundColor: AppTheme.accentYellow,
+                      backgroundColor: AppTheme.accentOrange,
                       child: Text(
                         repairer.name[0],
                         style: const TextStyle(
@@ -70,11 +70,11 @@ class RepairerCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
                     color: AppTheme.pureWhite.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(24),
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.star, color: AppTheme.accentYellow, size: 16),
+                      const Icon(Icons.star, color: AppTheme.accentOrange, size: 16),
                       const SizedBox(width: 4),
                       Text(
                         repairer.rating.toString(),

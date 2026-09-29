@@ -1,28 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
-  static const Color royalBlue = Color(0xFF1D5EFF);
-  static const Color trueBlack = Color(0xFF0D0D0D);
+  // Brand Colors (from reference)
+  static const Color primaryRed = Color(0xFFFF5E3A); // Deep orange/red for gradients
+  static const Color accentOrange = Color(0xFFFF2A6D);
+  static const Color darkGrey = Color(0xFF2C2C2E); // For buttons
+  
+  // Background & Surfaces
+  static const Color bgLightGrey = Color(0xFFF3F4F6); // Soft off-white background
   static const Color pureWhite = Color(0xFFFFFFFF);
-  static const Color accentYellow = Color(0xFFFFE800);
-  static const Color lightBlueBg = Color(0xFF427BFF);
-  static const Color greyText = Color(0xFF888888);
-  static const Color lightGrey = Color(0xFFF5F5F5);
+  
+  // Text Colors
+  static const Color trueBlack = Color(0xFF111111);
+  static const Color greyText = Color(0xFF8E8E93);
 
   static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
-      scaffoldBackgroundColor: pureWhite,
+      scaffoldBackgroundColor: bgLightGrey,
+      textTheme: GoogleFonts.plusJakartaSansTextTheme(),
       colorScheme: const ColorScheme.light(
-        primary: royalBlue,
-        secondary: accentYellow,
+        primary: primaryRed,
+        secondary: accentOrange,
         surface: pureWhite,
         onPrimary: pureWhite,
-        onSecondary: trueBlack,
+        onSecondary: pureWhite,
         onSurface: trueBlack,
       ),
       appBarTheme: const AppBarTheme(
-        backgroundColor: pureWhite,
+        backgroundColor: bgLightGrey,
         foregroundColor: trueBlack,
         elevation: 0,
         centerTitle: true,

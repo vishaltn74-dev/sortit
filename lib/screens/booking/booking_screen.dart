@@ -109,7 +109,7 @@ class _BookingScreenState extends State<BookingScreen> {
               ),
               const Spacer(),
               _isLoading 
-                ? const Center(child: CircularProgressIndicator(color: AppTheme.royalBlue))
+                ? const Center(child: CircularProgressIndicator(color: AppTheme.primaryRed))
                 : PrimaryButton(
                     text: 'Confirm Booking',
                     onPressed: _confirmBooking,
@@ -152,7 +152,7 @@ class _BookingScreenState extends State<BookingScreen> {
               Text(
                 '₹\${widget.repairer.inspectionFee}',
                 style: const TextStyle(
-                  color: AppTheme.accentYellow,
+                  color: AppTheme.accentOrange,
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
@@ -175,7 +175,7 @@ class _BookingScreenState extends State<BookingScreen> {
           color: isSelected ? AppTheme.trueBlack : AppTheme.pureWhite,
           borderRadius: BorderRadius.circular(24),
           border: Border.all(
-            color: isSelected ? AppTheme.trueBlack : AppTheme.lightGrey,
+            color: isSelected ? AppTheme.trueBlack : AppTheme.bgLightGrey,
             width: 2,
           ),
         ),

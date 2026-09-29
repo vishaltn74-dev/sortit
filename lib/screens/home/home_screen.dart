@@ -19,66 +19,68 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.royalBlue,
-      body: SafeArea(
-        bottom: false,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'SortIt',
-                    style: TextStyle(
-                      color: AppTheme.pureWhite,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 32),
-                  const Text(
-                    'Something\'s broken?',
-                    style: TextStyle(
-                      color: AppTheme.pureWhite,
-                      fontSize: 36,
-                      fontWeight: FontWeight.w300,
-                      height: 1.2,
-                    ),
-                  ),
-                  const Text(
-                    'SortIt.',
-                    style: TextStyle(
-                      color: AppTheme.pureWhite,
-                      fontSize: 48,
-                      fontWeight: FontWeight.bold,
-                      height: 1.1,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Center(
-                    child: Hero(
-                      tag: 'hero_icon',
-                      child: Container(
-                        height: 160,
-                        width: 160,
-                        decoration: const BoxDecoration(
-                          color: AppTheme.lightBlueBg,
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(
-                          Icons.handyman,
-                          size: 80,
-                          color: AppTheme.accentYellow,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+      backgroundColor: AppTheme.bgLightGrey,
+      body: Stack(
+        children: [
+          // Gradient Mesh Background
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            height: MediaQuery.of(context).size.height * 0.45,
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    AppTheme.primaryRed,
+                    AppTheme.accentOrange,
+                  ],
+                ),
               ),
             ),
+          ),
+          SafeArea(
+            bottom: false,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'SortIt',
+                        style: TextStyle(
+                          color: AppTheme.pureWhite,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 32),
+                      const Text(
+                        'Something\'s broken?',
+                        style: TextStyle(
+                          color: AppTheme.pureWhite,
+                          fontSize: 36,
+                          fontWeight: FontWeight.w300,
+                          height: 1.2,
+                        ),
+                      ),
+                      const Text(
+                        'SortIt.',
+                        style: TextStyle(
+                          color: AppTheme.pureWhite,
+                          fontSize: 48,
+                          fontWeight: FontWeight.bold,
+                          height: 1.1,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
             const SizedBox(height: 10),
             Expanded(
               child: Container(
@@ -146,6 +148,8 @@ class HomeScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      ],
       ),
     );
   }

@@ -42,7 +42,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
         ),
       ),
       body: _isLoading 
-        ? const Center(child: CircularProgressIndicator(color: AppTheme.royalBlue))
+        ? const Center(child: CircularProgressIndicator(color: AppTheme.primaryRed))
         : SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(24.0),
@@ -54,7 +54,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
                       width: 80,
                       height: 80,
                       decoration: const BoxDecoration(
-                        color: AppTheme.accentYellow,
+                        color: AppTheme.accentOrange,
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(Icons.build, size: 40, color: AppTheme.trueBlack),
@@ -73,7 +73,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
                   const SizedBox(height: 8),
                   Center(
                     child: Text(
-                      '\${widget.category.name} - \${widget.issue.name}',
+                      '${widget.category.name} - ${widget.issue.name}',
                       style: const TextStyle(
                         fontSize: 16,
                         color: AppTheme.greyText,
@@ -142,7 +142,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Row(
         children: [
-          const Icon(Icons.check_circle, color: AppTheme.royalBlue, size: 20),
+          const Icon(Icons.check_circle, color: AppTheme.primaryRed, size: 20),
           const SizedBox(width: 12),
           Text(cause, style: const TextStyle(fontSize: 16)),
         ],
@@ -154,7 +154,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: isBlack ? AppTheme.trueBlack : AppTheme.accentYellow,
+        color: isBlack ? AppTheme.trueBlack : AppTheme.accentOrange,
         borderRadius: BorderRadius.circular(24),
       ),
       child: Column(

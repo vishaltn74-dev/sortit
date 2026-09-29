@@ -21,7 +21,7 @@ class RepairerDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.royalBlue,
+      backgroundColor: AppTheme.primaryRed,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         foregroundColor: AppTheme.pureWhite,
@@ -40,7 +40,7 @@ class RepairerDetailsScreen extends StatelessWidget {
                   tag: 'avatar_\${repairer.id}',
                   child: CircleAvatar(
                     radius: 40,
-                    backgroundColor: AppTheme.accentYellow,
+                    backgroundColor: AppTheme.accentOrange,
                     child: Text(
                       repairer.name[0],
                       style: const TextStyle(
@@ -64,7 +64,7 @@ class RepairerDetailsScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.star, color: AppTheme.accentYellow, size: 20),
+                    const Icon(Icons.star, color: AppTheme.accentOrange, size: 20),
                     const SizedBox(width: 4),
                     Text(
                       repairer.rating.toString(),
@@ -116,7 +116,7 @@ class RepairerDetailsScreen extends StatelessWidget {
                     runSpacing: 8,
                     children: repairer.services.map((s) => Chip(
                       label: Text(s),
-                      backgroundColor: AppTheme.lightGrey,
+                      backgroundColor: AppTheme.bgLightGrey,
                       side: BorderSide.none,
                     )).toList(),
                   ),
@@ -160,8 +160,8 @@ class RepairerDetailsScreen extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: AppTheme.lightGrey,
-            borderRadius: BorderRadius.circular(16),
+            color: AppTheme.bgLightGrey,
+            borderRadius: BorderRadius.circular(20),
           ),
           child: Icon(icon, color: AppTheme.trueBlack),
         ),

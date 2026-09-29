@@ -37,7 +37,7 @@ class IssueTile extends StatelessWidget {
                 ),
                 const Icon(
                   Icons.arrow_forward_ios,
-                  color: AppTheme.accentYellow,
+                  color: AppTheme.accentOrange,
                   size: 16,
                 ),
               ],
