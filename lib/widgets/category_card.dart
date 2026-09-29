@@ -14,8 +14,6 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool hasImage = category.icon == 'ac' || category.icon == 'phone';
-
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -35,23 +33,12 @@ class CategoryCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
           child: Stack(
             children: [
-              if (hasImage)
-                Positioned.fill(
-                  child: Image.asset(
-                    _getImagePath(category.icon),
-                    fit: BoxFit.cover,
-                  ),
+              Positioned.fill(
+                child: Image.asset(
+                  _getImagePath(category.icon),
+                  fit: BoxFit.cover,
                 ),
-              if (!hasImage)
-                Positioned.fill(
-                  child: Center(
-                    child: Icon(
-                      _getIcon(category.icon),
-                      size: 64,
-                      color: AppTheme.primaryRed.withValues(alpha: 0.15),
-                    ),
-                  ),
-                ),
+              ),
               Positioned(
                 bottom: 20,
                 left: 20,
@@ -80,18 +67,6 @@ class CategoryCard extends StatelessWidget {
   }
 
   String _getImagePath(String iconName) {
-    if (iconName == 'ac') return 'assets/images/ac.jpg';
-    if (iconName == 'phone') return 'assets/images/phone.jpg';
-    return 'assets/images/handyman.jpg';
-  }
-
-  IconData _getIcon(String iconName) {
-    switch (iconName) {
-      case 'washing_machine': return Icons.local_laundry_service;
-      case 'laptop': return Icons.laptop_mac;
-      case 'bicycle': return Icons.pedal_bike;
-      case 'electrical': return Icons.electrical_services;
-      default: return Icons.build;
-    }
+    return 'assets/images/$iconName.jpg';
   }
 }
