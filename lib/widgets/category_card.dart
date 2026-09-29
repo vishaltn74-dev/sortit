@@ -35,15 +35,24 @@ class CategoryCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: AppTheme.primaryRed.withValues(alpha: 0.1),
-                shape: BoxShape.circle,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.1),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  )
+                ],
               ),
-              child: Icon(
-                _getIcon(category.icon),
-                color: AppTheme.primaryRed,
-                size: 28,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.asset(
+                  _getImagePath(category.icon),
+                  width: 56,
+                  height: 56,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             Text(
@@ -60,15 +69,11 @@ class CategoryCard extends StatelessWidget {
     );
   }
 
-  IconData _getIcon(String iconName) {
+  String _getImagePath(String iconName) {
     switch (iconName) {
-      case 'ac': return Icons.ac_unit;
-      case 'phone': return Icons.smartphone;
-      case 'washing_machine': return Icons.local_laundry_service;
-      case 'laptop': return Icons.laptop_mac;
-      case 'bicycle': return Icons.pedal_bike;
-      case 'electrical': return Icons.electrical_services;
-      default: return Icons.build;
+      case 'ac': return 'assets/images/ac.jpg';
+      case 'phone': return 'assets/images/phone.jpg';
+      default: return 'assets/images/handyman.jpg';
     }
   }
 }

@@ -54,69 +54,101 @@ class _BookingScreenState extends State<BookingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.pureWhite,
-      appBar: AppBar(
-        title: const Text('Booking'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildSummaryCard(),
-              const SizedBox(height: 32),
-              const Text(
-                'Preferred Date',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-              ),
-              const SizedBox(height: 16),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                physics: const BouncingScrollPhysics(),
-                child: Row(
-                  children: List.generate(dates.length, (index) {
-                    return _buildChoiceChip(
-                      text: dates[index],
-                      isSelected: _selectedDate == index,
-                      onTap: () => setState(() => _selectedDate = index),
-                    );
-                  }),
-                ),
-              ),
-              const SizedBox(height: 32),
-              const Text(
-                'Preferred Time',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-              ),
-              const SizedBox(height: 16),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                physics: const BouncingScrollPhysics(),
-                child: Row(
-                  children: List.generate(times.length, (index) {
-                    return _buildChoiceChip(
-                      text: times[index],
-                      isSelected: _selectedTime == index,
-                      onTap: () => setState(() => _selectedTime = index),
-                    );
-                  }),
-                ),
-              ),
-              const Spacer(),
-              _isLoading 
-                ? const Center(child: CircularProgressIndicator(color: AppTheme.primaryRed))
-                : PrimaryButton(
-                    text: 'Confirm Booking',
-                    onPressed: _confirmBooking,
-                  ),
-            ],
+      backgroundColor: AppTheme.bgLightGrey,
+      body: Stack(
+        children: [
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            height: MediaQuery.of(context).size.height * 0.45,
+            child: Image.asset(
+              'assets/images/bg_gradient.jpg',
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
+          SafeArea(
+            bottom: false,
+            child: Column(
+              children: [
+                AppBar(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  foregroundColor: AppTheme.pureWhite,
+                  title: const Text('Booking'),
+                  leading: IconButton(
+                    icon: const Icon(Icons.arrow_back_ios_new),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(32.0),
+                    decoration: const BoxDecoration(
+                      color: AppTheme.pureWhite,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(40),
+                        topRight: Radius.circular(40),
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildSummaryCard(),
+                        const SizedBox(height: 32),
+                        const Text(
+                          'Preferred Date',
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
+                        const SizedBox(height: 16),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          physics: const BouncingScrollPhysics(),
+                          child: Row(
+                            children: List.generate(dates.length, (index) {
+                              return _buildChoiceChip(
+                                text: dates[index],
+                                isSelected: _selectedDate == index,
+                                onTap: () => setState(() => _selectedDate = index),
+                              );
+                            }),
+                          ),
+                        ),
+                        const SizedBox(height: 32),
+                        const Text(
+                          'Preferred Time',
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
+                        const SizedBox(height: 16),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          physics: const BouncingScrollPhysics(),
+                          child: Row(
+                            children: List.generate(times.length, (index) {
+                              return _buildChoiceChip(
+                                text: times[index],
+                                isSelected: _selectedTime == index,
+                                onTap: () => setState(() => _selectedTime = index),
+                              );
+                            }),
+                          ),
+                        ),
+                        const Spacer(),
+                        _isLoading 
+                          ? const Center(child: CircularProgressIndicator(color: AppTheme.primaryRed))
+                          : PrimaryButton(
+                              text: 'Confirm Booking',
+                              onPressed: _confirmBooking,
+                            ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

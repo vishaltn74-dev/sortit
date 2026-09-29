@@ -67,72 +67,107 @@ class _RepairersScreenState extends State<RepairersScreen> {
     final sponsored = repairers[0];
 
     return Scaffold(
-      backgroundColor: AppTheme.primaryRed,
-      appBar: AppBar(
-        backgroundColor: AppTheme.primaryRed,
-        foregroundColor: AppTheme.pureWhite,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: const Text('Nearby Repairers'),
-      ),
-      body: Column(
+      backgroundColor: AppTheme.bgLightGrey,
+      body: Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Row(
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            height: MediaQuery.of(context).size.height * 0.45,
+            child: Image.asset(
+              'assets/images/bg_gradient.jpg',
+              fit: BoxFit.cover,
+            ),
+          ),
+          SafeArea(
+            bottom: false,
+            child: Column(
               children: [
+                AppBar(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  foregroundColor: AppTheme.pureWhite,
+                  leading: IconButton(
+                    icon: const Icon(Icons.arrow_back_ios_new),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                  title: const Text('Nearby Repairers'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                          decoration: BoxDecoration(
+                            color: AppTheme.pureWhite,
+                            borderRadius: BorderRadius.circular(30),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withValues(alpha: 0.04),
+                                blurRadius: 24,
+                                offset: const Offset(0, 8),
+                              )
+                            ],
+                          ),
+                          child: Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  color: AppTheme.primaryRed.withValues(alpha: 0.1),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(Icons.location_on, color: AppTheme.primaryRed, size: 20),
+                              ),
+                              const SizedBox(width: 12),
+                              const Text(
+                                'Detecting location...',
+                                style: TextStyle(
+                                  color: AppTheme.trueBlack,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 Expanded(
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                    decoration: BoxDecoration(
-                      color: AppTheme.primaryRed,
-                      borderRadius: BorderRadius.circular(30),
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      color: AppTheme.pureWhite,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(40),
+                        topRight: Radius.circular(40),
+                      ),
                     ),
-                    child: const Row(
-                      children: [
-                        Icon(Icons.location_on, color: AppTheme.pureWhite, size: 20),
-                        SizedBox(width: 8),
-                        Text(
-                          'Detecting location...',
-                          style: TextStyle(color: AppTheme.pureWhite),
+                    child: _isLoading
+                      ? const Center(child: CircularProgressIndicator(color: AppTheme.primaryRed))
+                      : ListView(
+                          physics: const BouncingScrollPhysics(),
+                          padding: const EdgeInsets.all(24),
+                          children: [
+                            SponsoredCard(
+                              repairer: sponsored,
+                              onTap: () => _navigateToDetails(context, sponsored),
+                            ),
+                            const SizedBox(height: 8),
+                            ...repairers.map((r) => RepairerCard(
+                              repairer: r,
+                              distance: 1.2,
+                              onTap: () => _navigateToDetails(context, r),
+                            )),
+                          ],
                         ),
-                      ],
-                    ),
                   ),
                 ),
               ],
-            ),
-          ),
-          Expanded(
-            child: Container(
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                color: AppTheme.pureWhite,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40),
-                  topRight: Radius.circular(40),
-                ),
-              ),
-              child: _isLoading
-                ? const Center(child: CircularProgressIndicator(color: AppTheme.primaryRed))
-                : ListView(
-                    physics: const BouncingScrollPhysics(),
-                    padding: const EdgeInsets.all(24),
-                    children: [
-                      SponsoredCard(
-                        repairer: sponsored,
-                        onTap: () => _navigateToDetails(context, sponsored),
-                      ),
-                      const SizedBox(height: 8),
-                      ...repairers.map((r) => RepairerCard(
-                        repairer: r,
-                        distance: 1.2,
-                        onTap: () => _navigateToDetails(context, r),
-                      )),
-                    ],
-                  ),
             ),
           ),
         ],
