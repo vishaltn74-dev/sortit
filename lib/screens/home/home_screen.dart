@@ -22,23 +22,15 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: AppTheme.bgLightGrey,
       body: Stack(
         children: [
-          // Gradient Mesh Background
+          // Gradient Image Background
           Positioned(
             top: 0,
             left: 0,
             right: 0,
             height: MediaQuery.of(context).size.height * 0.45,
-            child: Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    AppTheme.primaryRed,
-                    AppTheme.accentOrange,
-                  ],
-                ),
-              ),
+            child: Image.asset(
+              'assets/images/bg_gradient.jpg',
+              fit: BoxFit.cover,
             ),
           ),
           SafeArea(
