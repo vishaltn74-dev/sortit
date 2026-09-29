@@ -5,6 +5,7 @@ import 'package:sortit/models/repairer.dart';
 import 'package:sortit/theme/app_theme.dart';
 import 'package:sortit/widgets/repairer_card.dart';
 import 'package:sortit/widgets/sponsored_card.dart';
+import 'package:sortit/widgets/admob_banner.dart';
 import 'package:sortit/screens/repairer_details/repairer_details_screen.dart';
 
 class RepairersScreen extends StatefulWidget {
@@ -149,20 +150,30 @@ class _RepairersScreenState extends State<RepairersScreen> {
                     ),
                     child: _isLoading
                       ? const Center(child: CircularProgressIndicator(color: AppTheme.primaryRed))
-                      : ListView(
-                          physics: const BouncingScrollPhysics(),
-                          padding: const EdgeInsets.all(24),
+                      : Column(
                           children: [
-                            SponsoredCard(
-                              repairer: sponsored,
-                              onTap: () => _navigateToDetails(context, sponsored),
+                            Expanded(
+                              child: ListView(
+                                physics: const BouncingScrollPhysics(),
+                                padding: const EdgeInsets.all(24),
+                                children: [
+                                  SponsoredCard(
+                                    repairer: sponsored,
+                                    onTap: () => _navigateToDetails(context, sponsored),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  ...repairers.map((r) => RepairerCard(
+                                    repairer: r,
+                                    distance: 1.2,
+                                    onTap: () => _navigateToDetails(context, r),
+                                  )),
+                                ],
+                              ),
                             ),
-                            const SizedBox(height: 8),
-                            ...repairers.map((r) => RepairerCard(
-                              repairer: r,
-                              distance: 1.2,
-                              onTap: () => _navigateToDetails(context, r),
-                            )),
+                            const Padding(
+                              padding: EdgeInsets.only(bottom: 16.0),
+                              child: AdMobBanner(),
+                            ),
                           ],
                         ),
                   ),
