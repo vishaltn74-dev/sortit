@@ -20,12 +20,16 @@ class SponsoredCard extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 16),
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
-          color: AppTheme.pureWhite,
+          gradient: const LinearGradient(
+            colors: [Color(0xFF4A90E2), Color(0xFF003366)], // Premium blue gradient
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
           borderRadius: BorderRadius.circular(32),
-          border: Border.all(color: Colors.white, width: 2),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.2), width: 1),
           boxShadow: [
             BoxShadow(
-              color: AppTheme.primaryRed.withValues(alpha: 0.1),
+              color: const Color(0xFF4A90E2).withValues(alpha: 0.3),
               blurRadius: 24,
               offset: const Offset(0, 8),
             )
@@ -40,15 +44,16 @@ class SponsoredCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
-                    color: AppTheme.primaryRed.withValues(alpha: 0.1),
+                    color: AppTheme.pureWhite.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: const Text(
-                    'Sponsored',
+                    'SPONSORED',
                     style: TextStyle(
-                      color: AppTheme.primaryRed,
+                      color: AppTheme.pureWhite,
                       fontSize: 10,
                       fontWeight: FontWeight.bold,
+                      letterSpacing: 1.2,
                     ),
                   ),
                 ),
@@ -59,7 +64,7 @@ class SponsoredCard extends StatelessWidget {
                     Text(
                       repairer.rating.toString(),
                       style: const TextStyle(
-                        color: AppTheme.trueBlack,
+                        color: AppTheme.pureWhite,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -74,14 +79,14 @@ class SponsoredCard extends StatelessWidget {
                   height: 50,
                   width: 50,
                   decoration: BoxDecoration(
-                    color: AppTheme.bgLightGrey,
+                    color: AppTheme.pureWhite,
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Center(
                     child: Text(
                       repairer.name[0],
                       style: const TextStyle(
-                        color: AppTheme.primaryRed,
+                        color: Color(0xFF4A90E2),
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
@@ -96,7 +101,7 @@ class SponsoredCard extends StatelessWidget {
                       Text(
                         repairer.name,
                         style: const TextStyle(
-                          color: AppTheme.trueBlack,
+                          color: AppTheme.pureWhite,
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
@@ -104,8 +109,8 @@ class SponsoredCard extends StatelessWidget {
                       const SizedBox(height: 4),
                       Text(
                         repairer.category,
-                        style: const TextStyle(
-                          color: AppTheme.greyText,
+                        style: TextStyle(
+                          color: AppTheme.pureWhite.withValues(alpha: 0.7),
                           fontSize: 14,
                         ),
                       ),
@@ -115,10 +120,10 @@ class SponsoredCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: AppTheme.primaryRed.withValues(alpha: 0.1),
+                    color: AppTheme.pureWhite.withValues(alpha: 0.2),
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(Icons.arrow_forward, color: AppTheme.primaryRed, size: 20),
+                  child: const Icon(Icons.arrow_forward, color: AppTheme.pureWhite, size: 20),
                 )
               ],
             ),
