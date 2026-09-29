@@ -50,3 +50,6 @@ app.*.map.json
 key.properties
 .env
 
+
+# Local API Keys
+api_keys.json
