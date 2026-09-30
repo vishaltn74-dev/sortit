@@ -5,6 +5,7 @@ import 'package:sortit/models/repairer.dart';
 import 'package:sortit/theme/app_theme.dart';
 import 'package:sortit/widgets/repairer_card.dart';
 import 'package:sortit/widgets/sponsored_card.dart';
+import 'package:sortit/widgets/admob_banner.dart';
 import 'package:sortit/screens/repairer_details/repairer_details_screen.dart';
 
 class RepairersScreen extends StatefulWidget {
@@ -167,6 +168,7 @@ class _RepairersScreenState extends State<RepairersScreen> {
                         ),
                   ),
                 ),
+                const AdMobBanner(),
               ],
             ),
           ),
