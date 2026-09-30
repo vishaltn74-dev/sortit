@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sortit/widgets/admob_banner.dart';
 
 class RepairersScreen extends StatelessWidget {
   const RepairersScreen({super.key});
@@ -7,7 +8,14 @@ class RepairersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Repairers')),
-      body: const Center(child: Text('Repairers Screen')),
+      body: Column(
+        children: const [
+          Expanded(
+            child: Center(child: Text('Repairers Screen')),
+          ),
+          AdMobBanner(),
+        ],
+      ),
     );
   }
 }
