@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:sortit/services/revenuecat_service.dart';
 import 'package:sortit/services/firebase_service.dart';
+import 'package:sortit/services/seed_service.dart';
 import 'package:sortit/theme/app_theme.dart';
 import 'package:sortit/screens/home/home_screen.dart';
 
@@ -13,6 +14,9 @@ void main() async {
 
   // Initialize Firebase
   await FirebaseService.initialize();
+
+  // Seed demo data if missing
+  await SeedService.seedIfNotSeeded();
 
   // Initialize RevenueCat
   await RevenueCatService.init();

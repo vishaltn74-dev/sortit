@@ -670,6 +670,21 @@ class SeedService {
       repairersCount: repairersCount,
     );
   }
+  /// Safe one-time seeding. Checks if data exists before writing.
+  static Future<void> seedIfNotSeeded({FirebaseFirestore? firestore}) async {
+    try {
+      final db = firestore ?? FirebaseService.firestore;
+      final snapshot = await db.collection(categoriesCollection).limit(1).get();
+      if (snapshot.docs.isEmpty) {
+        debugPrint('Firestore appears empty. Initiating one-time seed...');
+        await seedAll(firestore: db);
+      } else {
+        debugPrint('Firestore is already seeded. Skipping seed operation.');
+      }
+    } catch (e, stackTrace) {
+      debugPrint('SeedService.seedIfNotSeeded failed: $e\n$stackTrace');
+    }
+  }
 }
 
 /// Summary report of the Firestore seed operation.

@@ -7,15 +7,21 @@ import 'package:sortit/widgets/repairer_card.dart';
 import 'package:sortit/widgets/sponsored_card.dart';
 import 'package:sortit/widgets/admob_banner.dart';
 import 'package:sortit/screens/repairer_details/repairer_details_screen.dart';
+import 'package:sortit/services/location_service.dart';
+import 'package:sortit/services/repairer_service.dart';
 
 class RepairersScreen extends StatefulWidget {
   final Category category;
   final Issue issue;
+  final LocationService? locationService;
+  final RepairerService? repairerService;
 
   const RepairersScreen({
     super.key,
     required this.category,
     required this.issue,
+    this.locationService,
+    this.repairerService,
   });
 
   @override
@@ -24,48 +30,68 @@ class RepairersScreen extends StatefulWidget {
 
 class _RepairersScreenState extends State<RepairersScreen> {
   bool _isLoading = true;
-
-  List<Repairer> _getMockRepairers() {
-    return [
-      Repairer(
-        id: 'r1',
-        name: 'QuickFix Electronics',
-        category: 'Appliance Repair',
-        rating: 4.8,
-        jobsCompleted: 342,
-        inspectionFee: 500,
-        latitude: 0,
-        longitude: 0,
-        phone: '9876543210',
-        services: ['Washing Machine', 'AC', 'Fridge'],
-      ),
-      Repairer(
-        id: 'r2',
-        name: 'Sharma Repairs',
-        category: 'General Electrical',
-        rating: 4.5,
-        jobsCompleted: 128,
-        inspectionFee: 300,
-        latitude: 0,
-        longitude: 0,
-        phone: '9876543211',
-        services: ['Washing Machine', 'Electrical'],
-      ),
-    ];
-  }
+  String _locationStatus = 'Detecting location...';
+  List<NearbyRepairer> _repairers = [];
+  String? _errorMessage;
 
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 1000), () {
-      if (mounted) setState(() => _isLoading = false);
-    });
+    _fetchData();
+  }
+
+  Future<void> _fetchData() async {
+    final locService = widget.locationService ?? const LocationService();
+    final repService = widget.repairerService ?? RepairerService();
+
+    try {
+      final locResult = await locService.getCurrentLocation();
+      if (!mounted) return;
+
+      if (!locResult.isSuccess || locResult.latitude == null || locResult.longitude == null) {
+        setState(() {
+          _locationStatus = locResult.errorMessage ?? 'Location failed';
+        });
+      } else {
+        setState(() {
+          _locationStatus = 'Location obtained';
+        });
+      }
+
+      final repairers = await repService.fetchRepairersByCategory(widget.category.name);
+      if (!mounted) return;
+
+      List<NearbyRepairer> sorted = [];
+      if (locResult.isSuccess && locResult.latitude != null && locResult.longitude != null) {
+        sorted = locService.getNearestRepairers(
+          userLatitude: locResult.latitude!,
+          userLongitude: locResult.longitude!,
+          repairers: repairers,
+        );
+      } else {
+        sorted = repairers.map((r) => NearbyRepairer(
+          repairer: r, 
+          distanceKm: 0.0, 
+          formattedDistance: 'Unknown'
+        )).toList();
+      }
+
+      setState(() {
+        _repairers = sorted;
+        _isLoading = false;
+      });
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _errorMessage = 'Failed to load repairers.';
+          _isLoading = false;
+        });
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final repairers = _getMockRepairers();
-    final sponsored = repairers[0];
 
     return Scaffold(
       backgroundColor: AppTheme.bgLightGrey,
@@ -124,11 +150,14 @@ class _RepairersScreenState extends State<RepairersScreen> {
                                 child: const Icon(Icons.location_on, color: AppTheme.primaryRed, size: 20),
                               ),
                               const SizedBox(width: 12),
-                              const Text(
-                                'Detecting location...',
-                                style: TextStyle(
-                                  color: AppTheme.trueBlack,
-                                  fontWeight: FontWeight.bold,
+                              Expanded(
+                                child: Text(
+                                  _locationStatus,
+                                  style: const TextStyle(
+                                    color: AppTheme.trueBlack,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                             ],
@@ -150,22 +179,28 @@ class _RepairersScreenState extends State<RepairersScreen> {
                     ),
                     child: _isLoading
                       ? const Center(child: CircularProgressIndicator(color: AppTheme.primaryRed))
-                      : ListView(
-                          physics: const BouncingScrollPhysics(),
-                          padding: const EdgeInsets.all(24),
-                          children: [
-                            SponsoredCard(
-                              repairer: sponsored,
-                              onTap: () => _navigateToDetails(context, sponsored),
-                            ),
-                            const SizedBox(height: 8),
-                            ...repairers.map((r) => RepairerCard(
-                              repairer: r,
-                              distance: 1.2,
-                              onTap: () => _navigateToDetails(context, r),
-                            )),
-                          ],
-                        ),
+                      : _errorMessage != null
+                          ? Center(child: Text(_errorMessage!, style: const TextStyle(color: AppTheme.primaryRed)))
+                          : _repairers.isEmpty
+                              ? const Center(child: Text('No repairers found in this category.', style: TextStyle(color: AppTheme.greyText)))
+                              : ListView(
+                                  physics: const BouncingScrollPhysics(),
+                                  padding: const EdgeInsets.all(24),
+                                  children: [
+                                    if (_repairers.isNotEmpty)
+                                      SponsoredCard(
+                                        repairer: _repairers[0].repairer,
+                                        onTap: () => _navigateToDetails(context, _repairers[0].repairer),
+                                      ),
+                                    if (_repairers.isNotEmpty)
+                                      const SizedBox(height: 8),
+                                    ..._repairers.map((r) => RepairerCard(
+                                      repairer: r.repairer,
+                                      distance: r.distanceKm,
+                                      onTap: () => _navigateToDetails(context, r.repairer),
+                                    )),
+                                  ],
+                                ),
                   ),
                 ),
                 const AdMobBanner(),

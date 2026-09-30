@@ -39,50 +39,56 @@ class RepairerCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    Container(
-                      height: 50,
-                      width: 50,
-                      decoration: BoxDecoration(
-                        color: AppTheme.bgLightGrey,
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: Center(
-                        child: Text(
-                          repairer.name[0],
-                          style: const TextStyle(
-                            color: AppTheme.trueBlack,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          color: AppTheme.bgLightGrey,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Center(
+                          child: Text(
+                            repairer.name[0],
+                            style: const TextStyle(
+                              color: AppTheme.trueBlack,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(width: 16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          repairer.name,
-                          style: const TextStyle(
-                            color: AppTheme.trueBlack,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              repairer.name,
+                              style: const TextStyle(
+                                color: AppTheme.trueBlack,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              '${distance.toStringAsFixed(1)} km away',
+                              style: const TextStyle(
+                                color: AppTheme.greyText,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
                         ),
-                        const SizedBox(height: 4),
-                        Text(
-                          '${distance.toStringAsFixed(1)} km away',
-                          style: const TextStyle(
-                            color: AppTheme.greyText,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                      ),
+                    ],
+                  ),
                 ),
+                const SizedBox(width: 16),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
