@@ -71,10 +71,13 @@ class _AdMobBannerState extends State<AdMobBanner> {
   Widget build(BuildContext context) {
     if (_bannerAd != null && _isLoaded) {
       return SafeArea(
-        child: SizedBox(
-          width: _bannerAd!.size.width.toDouble(),
-          height: _bannerAd!.size.height.toDouble(),
-          child: AdWidget(ad: _bannerAd!),
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: SizedBox(
+            width: _bannerAd!.size.width.toDouble(),
+            height: _bannerAd!.size.height.toDouble(),
+            child: AdWidget(ad: _bannerAd!),
+          ),
         ),
       );
     }
